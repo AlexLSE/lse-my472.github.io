@@ -43,12 +43,14 @@ ipu_clean %>%
            ip == min(ip, na.rm = TRUE))
 
 # Optional --------------------------------------------------------------------
+
+
 filter_worst_months <- function(x) {
   filtered <- ipu_clean %>%
-    filter(country == x) %>%
-    _____(____________ == ________________________ | 
-             ip == ________________________)
-  return(_______)
+    filter(ï..country == x) %>%
+    filter(unemployment == max(unemployment, na.rm = TRUE) | 
+             ip == min(ip, na.rm = TRUE))
+  return(filtered)
 }
 
 filter_worst_months("germany")
@@ -69,11 +71,11 @@ ipu_clean %>%
 
 # Optional --------------------------------------------------------------------
 ipu_clean %>%
-  group_by(_______) %>%
-  __________(nonNA_ip = _____________),
-            nonNA_ue = ____________________),
-            nonNA_ip_pct = nonNA_ip / length(__),
-            nonNA_ue_pct = nonNA_ue / ______________________)
+  group_by(ï..country) %>%
+  summarise(nonNA_ip = sum(!is.na(ip)),
+            nonNA_ue = sum(!is.na(unemployment)),
+            nonNA_ip_pct = nonNA_ip / length(ip),
+            nonNA_ue_pct = nonNA_ue / length(unemployment))
 
 
 ```
